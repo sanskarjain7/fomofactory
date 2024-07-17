@@ -98,18 +98,18 @@ function CoinDataComponent() {
   const dispatch = useDispatch();
   const coinData = useAppSelector(selectCoinData);
 
-  // useEffect(() => {
-  //   socket.emit('subscribeToCoin', 'Bitcoin'); // Example: Subscribe to Bitcoin updates
+  useEffect(() => {
+    socket.emit('subscribeToCoin', 'Bitcoin'); // Example: Subscribe to Bitcoin updates
 
-  //   socket.on('coinData', (data) => {
-  //     console.log('Received data for coin:', data);
-  //     dispatch(setCoinData(data));
-  //   });
+    socket.on('coinData', (data) => {
+      console.log('Received data for coin:', data);
+      dispatch(setCoinData(data));
+    });
 
-  //   return () => {
-  //     socket.off('coinData');
-  //   };
-  // }, [dispatch]);
+    return () => {
+      socket.off('coinData');
+    };
+  }, [dispatch]);
 
   return (
     <div>
