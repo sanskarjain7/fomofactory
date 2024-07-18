@@ -34,13 +34,13 @@ const fetchPrice = async (coin) => {
 // Async function to get recent entries for a coin
 const getRecentEntriesForCoin = async (req, res) => {
     try {
-        // Your business logic here
-        // Example: Fetch recent entries for a coin from the database
-
         // Example response
-        const coinId = req.params.coinId;
-        const entries = await find({ coinId }).sort({ createdAt: -1 }).limit(10);
-
+        console.log('getRecentEntriesForCoin', req);
+        const coinName = 'Bitcoin';
+        const entries = await Coin.find()
+        // .sort({ timeStamp: -1 }).limit(20);
+        console.log('entries', entries);
+        // let entries = 'hehe'
         res.status(200).json(entries);
     } catch (error) {
         console.error(error);

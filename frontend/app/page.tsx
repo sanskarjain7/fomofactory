@@ -86,30 +86,43 @@
 // }
 
 
-import { useEffect } from 'react';
+import { use, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import io from 'socket.io-client';
 import { setCoinData, selectCoinData } from '../redux/coinDataSlice'; // Adjust the path as necessary
 import { useAppSelector } from '../redux/store'; // Adjust the path as necessary
 import Modal from './_components/modal';
-const socket = io('http://localhost:4000'); // Adjust the URL as needed
+// import { selectCoin } from '@/redux/modalSlice';
+import { modal, selectCoin } from '@/redux/modalSlice';
+// const socket = io('http://localhost:4000'); // Adjust the URL as needed
 
 function CoinDataComponent() {
   const dispatch = useDispatch();
   const coinData = useAppSelector(selectCoinData);
-
+  let coin = useAppSelector(modal);
   useEffect(() => {
-    socket.emit('subscribeToCoin', 'Bitcoin'); // Example: Subscribe to Bitcoin updates
-
-    socket.on('coinData', (data) => {
+    // socket.emit('subscribeToCoin', 'Bitcoin'); // Example: Subscribe to Bitcoin updates
+    const socket = io('http://localhost:4000'); // Adjust the URL as needed
+    socket.on('hello', (data) => {
       console.log('Received data for coin:', data);
-      dispatch(setCoinData(data));
+      // dispatch(setCoinData(data));
     });
 
     return () => {
-      socket.off('coinData');
+      socket.off('connection');
+      socket.disconnect();
     };
-  }, [dispatch]);
+  }, []);
+
+  useEffect(() => {
+
+    console.log('coin', coin.selectedCoin?.name);
+
+    // let coin = useAppSelector(selectCoin);
+    // console.log(coin);
+  }, [coin.selectedCoin])
+
+
 
   return (
     <div>

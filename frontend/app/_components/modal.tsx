@@ -9,7 +9,14 @@ const Modal = () => {
     const isOpen = useSelector((state: RootState) => state.modal.isOpen);
     const selectedCoin = useSelector((state: RootState) => state.modal.selectedCoin);
 
-    const coins = ["BTC", "ETH", "BNB", "SOL", "XRP"];
+    const coins = [
+        { symbol: "BTC", name: "Bitcoin" },
+        { symbol: "ETH", name: "Ethereum" },
+        { symbol: "BNB", name: "BNB" },
+        { symbol: "SOL", name: "Solana" },
+        { symbol: "XRP", name: "XRP" }
+    ];
+
 
     const handleCoinChange = (coin: Coin) => {
         dispatch(selectCoin(coin));
@@ -37,11 +44,11 @@ const Modal = () => {
                         <div>
                             {coins.map((coin) => (
                                 <button
-                                    key={coin}
+                                    key={coin.symbol}
                                     onClick={() => handleCoinChange(coin)}
                                     className={`py-2 px-4 rounded ${selectedCoin === coin ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"}`}
                                 >
-                                    {coin}
+                                    {coin.symbol}
                                 </button>
                             ))}
                         </div>

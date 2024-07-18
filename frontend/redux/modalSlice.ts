@@ -3,6 +3,8 @@ import { store } from './store';
 
 export interface Coin {
     // Define the properties of the Coin type here
+    name: string;
+    symbol: string;
 }
 
 export interface ModalState {
@@ -32,7 +34,7 @@ const modalSlice = createSlice({
 });
 
 export const { openModal, closeModal, selectCoin } = modalSlice.actions;
-
+export const modal = (state: RootState) => state.modal;
 export default modalSlice.reducer;
 
 export type RootState = ReturnType<typeof store.getState>;

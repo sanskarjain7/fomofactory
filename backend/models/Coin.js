@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { Schema, model } from 'mongoose';
 
 // Define the coin schema
@@ -11,7 +12,7 @@ const coinSchema = new Schema({
         required: true
     },
     symbol: {
-        type: String,
+        type: String || null,
         required: true
     },
     rank: {
@@ -27,33 +28,19 @@ const coinSchema = new Schema({
         required: true
     },
     images: {
-        png32: {
-            type: String,
-            required: true
-        },
-        png64: {
-            type: String,
-            required: true
-        },
-        webp32: {
-            type: String,
-            required: true
-        },
-        webp64: {
-            type: String,
-            required: true
-        }
+        type: Object,
+        required: true
     },
     exchanges: {
-        type: Array,
+        type: Number,
         required: true
     },
     markets: {
-        type: Array,
+        type: Number,
         required: true
     },
     pairs: {
-        type: Array,
+        type: Number,
         required: true
     },
     categories: {
@@ -97,13 +84,13 @@ const coinSchema = new Schema({
         required: true
     },
     delta: {
-        type: Number,
+        type: Object,
         required: true
     }
 });
 
 // Create the coin model
-const Coin = model('Coin', coinSchema);
+const Coin = mongoose.model('Coin', coinSchema);
 
 // Export the coin model
 export default Coin;
