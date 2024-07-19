@@ -1,7 +1,5 @@
 import Coin from '../models/Coin.js';
 import axios from 'axios';
-// Import models
-
 
 const fetchPrice = async (coin) => {
     let data = JSON.stringify({
@@ -29,26 +27,18 @@ const fetchPrice = async (coin) => {
     }
 };
 
-
-
-// Async function to get recent entries for a coin
 const getRecentEntriesForCoin = async (req, res) => {
     try {
-        // Example response
-        console.log('getRecentEntriesForCoin', req);
-        const coinName = 'Bitcoin';
-        const entries = await Coin.find()
-        // .sort({ timeStamp: -1 }).limit(20);
-        console.log('entries', entries);
-        // let entries = 'hehe'
+        const coinName = req.body.coinName;
+        let entries = await Coin.find({ name: coinName })
+            .sort({ timeStamp: -1 })
+            .limit(20);
         res.status(200).json(entries);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
-
-// Export functions
 export {
     getRecentEntriesForCoin,
     fetchPrice

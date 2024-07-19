@@ -14,7 +14,7 @@ export interface ModalState {
 
 const initialState: ModalState = {
     isOpen: false,
-    selectedCoin: null,
+    selectedCoin: { name: 'Bitcoin', symbol: 'BTC' },
 };
 
 const modalSlice = createSlice({

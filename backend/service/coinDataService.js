@@ -1,6 +1,6 @@
 import db from '../db.js';
+import Coin from '../models/Coin.js';
 async function insertCryptoData(jsonResponse) {
-    // Extracting relevant data from the jsonResponse
     const document = {
         timeStamp: new Date(),
         name: jsonResponse["name"],
@@ -30,9 +30,7 @@ async function insertCryptoData(jsonResponse) {
         delta: jsonResponse["delta"]
     };
 
-    // Inserting the document into the MongoDB collection
-    const collection = await db.connectToMongoDB();
-    await collection.insertOne(document);
+    await Coin.create(document);
     console.log('Data inserted successfully');
 }
 

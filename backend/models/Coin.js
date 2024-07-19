@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import { Schema, model } from 'mongoose';
 
-// Define the coin schema
 const coinSchema = new Schema({
     timeStamp: {
         type: Date,
@@ -12,8 +11,8 @@ const coinSchema = new Schema({
         required: true
     },
     symbol: {
-        type: String || null,
-        required: true
+        type: String,
+        required: false
     },
     rank: {
         type: Number,
@@ -61,7 +60,7 @@ const coinSchema = new Schema({
     },
     maxSupply: {
         type: Number,
-        required: true
+        required: false
     },
     links: {
         type: Object,
@@ -89,8 +88,6 @@ const coinSchema = new Schema({
     }
 });
 
-// Create the coin model
 const Coin = mongoose.model('Coin', coinSchema);
 
-// Export the coin model
 export default Coin;

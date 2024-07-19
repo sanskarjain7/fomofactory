@@ -6,12 +6,11 @@ import db from './db.js';
 import { Server } from 'socket.io';
 import cors from 'cors';
 import job from './cron/jobs.js';
-
-
-// job.start();
+import Coin from './models/Coin.js';
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 const port = process.env.PORT || 4000;
 
 app.use('/', coinRoutes);
@@ -26,9 +25,26 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
     console.log("a user connected");
     socket.emit("hello", "world");
-    // ...
 });
 
+io.on("disconnect", (socket) => {
+    console.log("a user disconnected");
+});
+
+
+async function watchCoinChanges() {
+    try {
+        const changeStream = Coin.watch();
+        changeStream.on('change', (next) => {
+            console.log('Change detected:');
+            io.emit('coinChange', next.fullDocument);
+        });
+    } catch (error) {
+        console.error('Error setting up change stream:', error);
+    }
+}
+
+watchCoinChanges()
 
 httpServer.listen(port, () => {
     console.log(`Server running on port ${port}`);
