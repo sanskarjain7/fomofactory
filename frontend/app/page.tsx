@@ -32,7 +32,7 @@ function CoinDataComponent() {
       socket.off('coinChange');
       socket.disconnect();
     };
-  }, []);
+  }, [coin.selectedCoin?.name, dispatch]);
 
   return (
     <div>

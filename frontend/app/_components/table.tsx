@@ -60,7 +60,7 @@ const CoinPriceTable: React.FC<CoinPriceTableProps> = ({ coinData }) => {
     let coinDetails = coinData[0]
     return (
         <div className='m-2'>
-            <div className='flex'> <h1 className='text-2xl items-center justify-center flex'>{coinDetails?.name} {coinDetails?.symbol || null}</h1>
+            <div className='flex'> <h1 className='text-2xl items-center justify-center flex'>{coinDetails?.name}</h1>
                 <Image src={coinDetails?.images.png64} alt={coinDetails?.name} width={60} height={60} /></div>
 
             <table className="table-fixed border mt-2">
