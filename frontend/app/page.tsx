@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect } from 'react';
+import Navbar from './_components/navbar';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import io from 'socket.io-client';
-import { selectCoinData, setCoinData } from '../redux/coinDataSlice'; // Adjust the path as necessary
+import { selectCoinData, setCoinData } from '../redux/coinDataSlice';
 import CoinPriceTable from './_components/table';
-import { useAppSelector } from '../redux/store'; // Adjust the path as necessary
-import Modal from './_components/modal';
+import { useAppSelector } from '../redux/store';
 import { modal } from '../redux/modalSlice';
 
 function CoinDataComponent() {
@@ -36,8 +36,7 @@ function CoinDataComponent() {
 
   return (
     <div>
-      <h1>Coin Data</h1>
-      <Modal />
+      <Navbar />
       <CoinPriceTable coinData={coinData} />
     </div>
   );

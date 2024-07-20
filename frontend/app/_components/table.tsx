@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Modal from './modal';
 interface CoinPriceProps {
     name: string;
     symbol: string | null;
@@ -60,8 +61,15 @@ const CoinPriceTable: React.FC<CoinPriceTableProps> = ({ coinData }) => {
     let coinDetails = coinData[0]
     return (
         <div className='m-2'>
-            <div className='flex'> <h1 className='text-2xl items-center justify-center flex'>{coinDetails?.name}</h1>
-                <Image src={coinDetails?.images.png64} alt={coinDetails?.name} width={60} height={60} /></div>
+            <div className='flex justify-between w-full'>
+                <div className='flex items-center'>
+                    <h1 className='text-2xl'>{coinDetails?.name}</h1>
+                    <Image className="ml-2" src={coinDetails?.images.png64} alt={coinDetails?.name} width={60} height={60} />
+                </div>
+                <div className='flex items-center'>
+                    <Modal />
+                </div>
+            </div>
 
             <table className="table-fixed border mt-2">
                 <thead className='text-[12px]'>

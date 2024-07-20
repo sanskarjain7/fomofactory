@@ -22,6 +22,7 @@ const Modal = () => {
 
 
     const handleCoinChange = (coin: Coin) => {
+        localStorage.setItem('selectedCoin', JSON.stringify(coin));
         dispatch(selectCoin(coin));
         dispatch(closeModal());
     };

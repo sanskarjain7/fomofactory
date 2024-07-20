@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
 interface CoinDataState {
-    coinData: any[]; // Adjust the type according to your data structure
+    coinData: any[];
 }
 
 const initialState: CoinDataState = {

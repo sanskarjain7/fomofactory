@@ -2,19 +2,22 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { store } from './store';
 
 export interface Coin {
-    // Define the properties of the Coin type here
     name: string;
     symbol: string;
 }
 
 export interface ModalState {
     isOpen: boolean;
-    selectedCoin: Coin | null;
+    selectedCoin: Coin;
 }
+
+const defaultSelectedCoin: Coin = { name: 'Bitcoin', symbol: 'BTC' };
+const storedSelectedCoin = typeof (window) != 'undefined' ? localStorage.getItem('selectedCoin') : null;
+const parsedSelectedCoin = storedSelectedCoin ? JSON.parse(storedSelectedCoin) : defaultSelectedCoin;
 
 const initialState: ModalState = {
     isOpen: false,
-    selectedCoin: { name: 'Bitcoin', symbol: 'BTC' },
+    selectedCoin: parsedSelectedCoin,
 };
 
 const modalSlice = createSlice({
